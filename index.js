@@ -79,8 +79,7 @@ let [chart1,chart2,chart3,chart4,chart5,chart6,chart7,chart8,chart9] = [null,nul
 let type = "lineal";
 let totalTests = 0;
 let totalDeaths = 0;
-let githubUrl = 'https://gist.githubusercontent.com/Cuchu/702a81d06127d8de52a7c18188d1f3e0/raw/7fb382e680ae55d0ea6bea398663b35f8630f809/covid.csv';
-//'https://docs.google.com/spreadsheets/d/16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA/export?format=csv&id=16-bnsDdmmgtSxdWbVMboIHo5FRuz76DBxsz_BbsEVWA&gid=0';
+
 let sheetUrl = 'https://gist.githubusercontent.com/Cuchu/95bc6f743842f1315f716627f2610d4c/raw/covid-19-arg.csv'
 let sheetCountriesUrl = 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv';
 
@@ -149,10 +148,6 @@ const renderTotalScores = (series, container) => {
     completeScore("score2", "Fallecidas", deaths, "rgba(231,76,60,0.9)", deathsIncrement, false, container);
     completeScore("score3", "En tratamiento", pendings, "#f39c12", 'resultado de conf - rec - fall', true, container);
 
-    let source = "<a target='_blank' href='https://gist.github.com/Cuchu/95bc6f743842f1315f716627f2610d4c'>Cuchu/covid-19-arg.csv</a>";
-
-    // completeScore("score4", "Fuentes", "", "#f39c12",
-    //     source, true, container);
 }
 
 const renderTestsScores = (series, container) => {
