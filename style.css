@@ -163,3 +163,16 @@ label:before, label:after
     color: rgba(102, 207, 239, 0.9);
     /*font-weight: bold;*/
 }
+
+footer {
+    width: 100%;
+    text-align: center;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 300;
+    color: #A2A39C;
+    margin-top: 15px;
+}
+
+footer i {
+    color: #F92672AA;
+}
