@@ -80,7 +80,8 @@ let type = "lineal";
 let totalTests = 0;
 let totalDeaths = 0;
 
-let sheetUrl = 'https://gist.githubusercontent.com/Cuchu/95bc6f743842f1315f716627f2610d4c/raw/covid-19-arg.csv'
+//let sheetUrl = 'https://gist.githubusercontent.com/Cuchu/95bc6f743842f1315f716627f2610d4c/raw/covid-19-arg.csv'
+let sheetUrl = 'https://gist.githubusercontent.com/Cuchu/910e86a20622be42b7ab7fc86914f2f8/raw/covid-19-arg-temp.csv'
 let sheetCountriesUrl = 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv';
 
 const renderChart1 = (categories, series, container, title) => {
@@ -183,7 +184,7 @@ Papa.parse(
     , {
         download: true,
         complete: function (results, file) {
-            console.log(results);
+            //console.log(results);
             handleResults(results);
 
         },
@@ -300,7 +301,6 @@ const handleResults = results => {
 
             /* Chart 2 */
         } else if (line[4] !== 'Indeterminado') {
-            console.log(line);
             let prov = toTitleCase(line[4].toLowerCase());
             if (provinces[prov] === undefined) {
                 provinces[prov] = {prov, cases: parseInt(line[7]), deaths: parseInt(line[9])}
@@ -343,7 +343,6 @@ const handleCountriesResults = results => {
     });
 
 
-    console.log(results);
     let countryIndex = null;
     let d = null;
     results.data.forEach((line, index) => {
