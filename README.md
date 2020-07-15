@@ -7,7 +7,7 @@ La web tiene como objetivo mostrar:
 - Evolución del COVID-19 en Argentina, visualizando de manera simple la evolución diaria de casos confirmados, fallecimientos y recuperaciones.
 - Distribución de los casos positivos entre las provincias, visualizando de manera simple en qué provincias se concentra la mayor cantidad de afectados.
 - Evolución de la cantidad de testeos realizados y porcentaje de acierto al momento de testear.
-- Algunas comparativas con otros países, ejemplo , aunque las comparaciones no serían una buena manera de analizar la situación de un país.
+- Comparativas como casos positivos, fallecimientos y cantidad de tests con los países USA, URY, BRA y CHL. Vale aclarar que las comparativas no serían una buena manera de analizar la situación actual de un país.
 
 Fuente de datos:
 
