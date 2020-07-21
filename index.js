@@ -80,8 +80,8 @@ let type = "lineal";
 let totalTests = 0;
 let totalDeaths = 0;
 
-//let sheetUrl = 'https://gist.githubusercontent.com/Cuchu/95bc6f743842f1315f716627f2610d4c/raw/covid-19-arg.csv'
-let sheetUrl = 'https://gist.githubusercontent.com/Cuchu/910e86a20622be42b7ab7fc86914f2f8/raw/covid-19-arg-temp.csv'
+let sheetUrl = 'https://gist.githubusercontent.com/Cuchu/95bc6f743842f1315f716627f2610d4c/raw/covid-19-arg.csv'
+//let sheetUrl = 'https://gist.githubusercontent.com/Cuchu/910e86a20622be42b7ab7fc86914f2f8/raw/covid-19-arg-temp.csv'
 let sheetCountriesUrl = 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv';
 
 const renderChart1 = (categories, series, container, title) => {
@@ -144,8 +144,8 @@ const renderTotalScores = (series, container) => {
 
     const pendings = cases - recovered - deaths;
 
-    completeScore("score0", "Confirmadas", cases, "rgba(102, 207, 239, .9)", casesIncrement, false, container);
-    completeScore("score1", "Recuperadas", recovered, "rgba(166, 226, 46, .9)", recoveredIncrement, false, container);
+    completeScore("score0", "Confirmadas", cases, "rgba(102, 207, 239, .9)", "", true, container);
+    completeScore("score1", "Recuperadas", recovered, "rgba(166, 226, 46, .9)", "", true, container);
     completeScore("score2", "Fallecidas", deaths, "rgba(231,76,60,0.9)", deathsIncrement, false, container);
     completeScore("score3", "En tratamiento", pendings, "#f39c12", 'resultado de conf - rec - fall', true, container);
 
@@ -253,7 +253,7 @@ const handleResults = results => {
     /* Chart 3 */
     series3.push(
         {
-            name: 'Positivos', data: [], type: 'column',
+            name: 'Posibles Positivos', data: [], type: 'column',
             lineColor: 'rgba(231, 76, 60, .8)',color: 'rgba(231, 76, 60, .8)'
         },
         {
@@ -265,7 +265,7 @@ const handleResults = results => {
             lineColor: 'rgb(243,156,18)',color: 'rgb(243,156,18)'
         },
         {
-            name: '% de Positivos', data: [],yAxis:1,
+            name: '% de Posibles Positivos', data: [],yAxis:1,
             lineColor: 'rgba(102, 207, 239, .9)',color: 'rgba(102, 207, 239, .9)'
         }
     );
@@ -279,10 +279,18 @@ const handleResults = results => {
             /* Chart 1 & Chart 3 */
         } else if (line[0] && line[4] === 'Indeterminado' && parseInt(line[6]) >= 1) {
             let d = moment(line[0], "DD-MM-YYYY");
+            let dateIndex = d.format("DD-MM-YYYY");
             categories1.push(d.format("DD/MM"));
 
             series1[0].data.push(line[6] && parseInt(line[6]) || 0);
-            series1[1].data.push(line[10] && parseInt(line[10]) || 0);
+            if(line[10] && parseInt(line[10])) {
+                series1[1].data.push(parseInt(line[10]));
+            } else if(auxiliaryData[dateIndex] !== undefined) {
+                series1[1].data.push(parseInt(auxiliaryData[dateIndex][0]));
+            } else {
+                series1[1].data.push(0)
+            }
+
             series1[2].data.push(line[8] && parseInt(line[8]) || 0);
 
             if(parseInt(line[12]) >= 1 && parseInt(line[13]) >= 1) {
@@ -295,6 +303,17 @@ const handleResults = results => {
                 series3[1].data.push(parseInt(line[12]));
                 series3[2].data.push(totalTests);
 
+
+                series3[3].data.push(parseFloat(((positives / totalTests) * 100).toFixed(2)));
+            } else if(auxiliaryData[dateIndex]) {
+                categories3.push(d.format("DD/MM"));
+
+                //totalTests = parseInt(line[6]) + parseInt(line[12]);
+                totalTests = parseInt(auxiliaryData[dateIndex][2]);
+                positives = parseInt(auxiliaryData[dateIndex][2]) - parseInt(auxiliaryData[dateIndex][1]);
+                series3[0].data.push(positives);
+                series3[1].data.push(parseInt(auxiliaryData[dateIndex][1]));
+                series3[2].data.push(totalTests);
 
                 series3[3].data.push(parseFloat(((positives / totalTests) * 100).toFixed(2)));
             }
