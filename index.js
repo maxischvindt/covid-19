@@ -178,20 +178,37 @@ const completeScore = (id, title, score, scoreColor, subscore, scoreAsText = fal
     ).appendTo("#" + container);
 };
 
-// Argentina parsing data
-Papa.parse(
-    sheetUrl
-    , {
-        download: true,
-        complete: function (results, file) {
-            //console.log(results);
-            handleResults(results);
+var csvs = ["https://gist.githubusercontent.com/Cuchu/9c6a76c9c4af3e6d64374a84f1046f5b/raw/aux-covid-19-arg.csv",
+            "https://gist.githubusercontent.com/Cuchu/95bc6f743842f1315f716627f2610d4c/raw/covid-19-arg.csv"];
+var allResults = [];
 
-        },
-        error: function (err, file, inputElem, reason) {
-            alert('Se modificó la fuente de datos, cuando adapte el modo de obtenerlos volverá a funcionar');
-        },
+for (var i = 0; i < csvs.length; i++)
+{
+    Papa.parse(csvs[i], {
+        download: true,
+        error: function(err, file, inputElem, reason) { alert('Se modificó la fuente de datos, cuando adapte el modo de obtenerlos volverá a funcionar'); },
+        complete: function(results) {
+            allResults.push(results);
+            if (allResults.length == csvs.length)
+            {
+                preHandleResults();
+            }
+        }
     });
+}
+
+function preHandleResults() {
+
+    if(allResults.length == 2 && allResults[0].data.length < allResults[1].data.length) {
+        auxiliaryData = [];
+        for(var i = 0; i < allResults[0].data.length; i++) {
+            element = allResults[0].data[i];
+            auxiliaryData[element[0]] = {0:element[1], 1:element[2], 2:element[3]}
+        }
+    }
+    handleResults(allResults[1]);
+
+}
 
 // World parsing data
 Papa.parse(
@@ -288,7 +305,7 @@ const handleResults = results => {
             } else if(auxiliaryData[dateIndex] !== undefined) {
                 series1[1].data.push(parseInt(auxiliaryData[dateIndex][0]));
             } else {
-                series1[1].data.push(0)
+                series1[1].data.push(null)
             }
 
             series1[2].data.push(line[8] && parseInt(line[8]) || 0);
