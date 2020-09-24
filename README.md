@@ -2,6 +2,8 @@ Otra web de COVID-19 en Argentina :p
 
 Live: https://cuchu.github.io/covid-19
 
+Datos: https://github.com/Cuchu/covid-19-data
+
 La web tiene como objetivo mostrar:
 
 - Evolución del COVID-19 en Argentina, visualizando de manera simple la evolución diaria de casos confirmados, fallecimientos y recuperaciones.
