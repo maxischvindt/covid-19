@@ -16,3 +16,5 @@ Fuente de datos:
 - Argentina - Se utiliza el repositorio de _Sistemas Mapaches_ (https://github.com/SistemasMapache/Covid19arData)
 - Otros datos - Se utiliza el repositorio de [_Our World in Data_](https://ourworldindata.org/) (https://github.com/owid/covid-19-data/tree/master/public/data)
 - Ministerio de Salud (https://www.argentina.gob.ar/coronavirus/informe-diario/julio2020)
+
+Entrevista en la tele :) https://www.elonce.com/secciones/sociedad/632948-joven-disenn-un-panel-de-datos-para-ver-la-evolucinn-del-covid-19-en-el-pans.htm
