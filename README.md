@@ -1,6 +1,6 @@
 Otra web de COVID-19 en Argentina :p
 
-Live: hcovid-19-cubs.vercel.app
+Live: https://covid-19-cubs.vercel.app/
 
 Datos: https://github.com/Cuchu/covid-19-data
 
